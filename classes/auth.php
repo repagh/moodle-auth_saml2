@@ -913,8 +913,15 @@ class auth extends \auth_plugin_base {
                                     }
                                 }
 
-                                // Custom profile fields have the prefix profile_field_ and will be saved as profile field data.
-                                $user->$field = $attributes[$attr][0];
+                                // with TUDelft special for tudPrefix field
+                                if ($attr == "sn" &&
+                                    !empty($attributes["tudPrefix"])) {
+                                    $user->$field = $attributes["tudPrefix"][0]
+                                        . " " . $attributes[$attr][0];
+                                } else {
+                                    // Custom profile fields have the prefix profile_field_ and will be saved as profile field data.
+                                    $user->$field = $attributes[$attr][0];
+                                }
                                 $update = true;
                             }
                         }
