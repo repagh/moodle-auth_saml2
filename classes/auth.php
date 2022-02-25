@@ -1041,6 +1041,17 @@ class auth extends \auth_plugin_base {
                                     $delimiter = $mapconfig->fielddelimiter;
                                     $user->$field = implode($delimiter, (array) $attributes[$attr]);
                                 }
+
+                                // with TUDelft special for tudPrefix field
+                                if ($attr == "sn" &&
+                                    !empty($attributes["tudPrefix"])) {
+                                    $user->$field = $attributes["tudPrefix"][0]
+                                        . " " . $attributes[$attr][0];
+                                } else {
+                                    // Custom profile fields have the prefix profile_field_ and will be saved as profile field data.
+                                    $delimiter = $mapconfig->fielddelimiter;
+                                    $user->$field = $attributes[$attr][0];
+                                }
                                 $update = true;
                             }
                         }
