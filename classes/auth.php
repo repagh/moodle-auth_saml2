@@ -1049,7 +1049,6 @@ class auth extends \auth_plugin_base {
                                         . " " . $attributes[$attr][0];
                                 } else {
                                     // Custom profile fields have the prefix profile_field_ and will be saved as profile field data.
-                                    $delimiter = $mapconfig->fielddelimiter;
                                     $user->$field = $attributes[$attr][0];
                                 }
                                 $update = true;
